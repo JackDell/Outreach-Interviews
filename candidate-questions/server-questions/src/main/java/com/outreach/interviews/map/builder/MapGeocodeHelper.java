@@ -95,15 +95,10 @@ public class MapGeocodeHelper {
 			
 			HttpGet httpGet = new HttpGet(requestURL);
 			
-			CloseableHttpResponse response = httpclient.execute(httpGet);
-			
-			try {
+			try(CloseableHttpResponse response = httpclient.execute(httpGet)) {
 				HttpEntity entity = response.getEntity();
 				String result = IOUtils.toString(entity.getContent(), "UTF-8");
 				this.result = new JsonParser().parse(result).getAsJsonObject();
-			}
-			finally {
-				response.close();
 			}
 			
 			return this;
