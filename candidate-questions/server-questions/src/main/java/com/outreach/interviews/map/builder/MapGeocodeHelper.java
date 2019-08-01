@@ -132,6 +132,9 @@ public class MapGeocodeHelper {
 		
 		// *************************For Internal Use Only***********************************//
 		private final String getURL() {
+			if(this.operation == null)
+				throw new IllegalArgumentException("Operation must be specified (directions/geocode)");
+			
 			return this.URL + this.operation.name() + "/json?";
 		}
 
